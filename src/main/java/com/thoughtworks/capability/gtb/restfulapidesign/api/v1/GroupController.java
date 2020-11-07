@@ -2,7 +2,6 @@ package com.thoughtworks.capability.gtb.restfulapidesign.api.v1;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,14 +11,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @Service
 public class GroupService {
     private final List<Group> groups;
     private final StudentService studentService;
-    private Random random = new Random();
     private final Integer TOTAL_GROUPS = 6;
+    private final Random random = new Random();
 
     public GroupService(StudentService studentService) {
         this.studentService = studentService;
