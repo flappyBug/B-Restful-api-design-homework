@@ -3,7 +3,6 @@ package com.thoughtworks.capability.gtb.restfulapidesign.api.v1;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,16 +24,17 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> removeStudent(@PathVariable Integer id) {
-
-        if (studentService.removeStudent(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().build();
+    void removeStudent(@PathVariable Integer id) {
+        studentService.removeStudent(id);
     }
 
     @GetMapping
     List<Student> queryStudents(@RequestParam(required = false) String gender) {
         return studentService.queryStudents(gender);
+    }
+
+    @GetMapping("/{id}")
+    Student getStudent(@PathVariable Integer id) {
+        return studentService.getStudent(id);
     }
 }

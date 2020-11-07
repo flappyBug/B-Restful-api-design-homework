@@ -1,7 +1,9 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,13 +19,25 @@ public class StudentService {
         students.put(student.getId(), student);
     }
 
-    public Student removeStudent(Integer id) {
-        return students.remove(id);
+    public void removeStudent(Integer id) {
+        throwNotFoundOnNull(students.remove(id));
     }
 
     public List<Student> queryStudents(String gender) {
         if (gender == null || gender.isEmpty()) {return new ArrayList<>(students.values());}
         return students.values().stream()
                 .filter(student -> student.getGender().equals(gender)).collect(Collectors.toList());
+    }
+
+
+    public Student getStudent(Integer id) {
+        return throwNotFoundOnNull(students.get(id));
+    }
+
+    private Student throwNotFoundOnNull(Student student) {
+        if (student == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
+        }
+        return student;
     }
 }
