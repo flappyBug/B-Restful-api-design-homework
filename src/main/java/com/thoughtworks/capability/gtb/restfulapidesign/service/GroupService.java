@@ -52,4 +52,8 @@ public class GroupService {
         }
         groups.get(id).setName(group.getName());
     }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
 }
