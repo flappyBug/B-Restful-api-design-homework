@@ -34,6 +34,11 @@ public class StudentService {
         return throwNotFoundOnNull(students.get(id));
     }
 
+    public void updateStudent(Integer id, Student info) {
+        Student student = throwNotFoundOnNull(students.get(id));
+        student.updateInfo(info);
+    }
+
     private Student throwNotFoundOnNull(Student student) {
         if (student == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
