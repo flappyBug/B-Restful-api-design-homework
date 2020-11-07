@@ -3,6 +3,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.api.v1;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,4 +24,10 @@ public class GroupController {
     List<Group> shuffleGroups() {
         return groupService.shuffleGroups();
     }
+
+    @PatchMapping("/{id}")
+    void rename(Integer id, Group group) {
+        groupService.rename(id, group);
+    }
+
 }

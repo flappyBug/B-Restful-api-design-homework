@@ -3,7 +3,9 @@ package com.thoughtworks.capability.gtb.restfulapidesign.service;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +44,12 @@ public class GroupService {
             groupIndex = (groupIndex + 1) % TOTAL_GROUPS;
         }
         return groups;
+    }
+
+    public void rename(Integer id, Group group) {
+        if (id >= TOTAL_GROUPS || id < 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group not found");
+        }
+        groups.get(id).setName(group.getName());
     }
 }
